@@ -4,19 +4,32 @@ using UnityEngine;
 
 
 // Weapon : MonoBehaviour means Weapon inherits from MonoBehaviour
+
+/*
+  What is MonoBehaviour ?
+   => MonoBehaviour is a base class that many Unity scripts derive from.
+*/
 public class Weapon : MonoBehaviour
 {
     [SerializeField] // This show the rotationSpeed in the Inspector of the Game object(Weapon) but can't be modified.
     private int rotationSpeed = 200;
-    // Start is called before the first frame update
-
+    
     [SerializeField]
     private Vector3 rotationPoint = Vector3.zero;
+
+    // Start is called before the first frame update
     void Start()
     {
         
     }
 
+    
+
+    /*
+      What is a method?
+        It represents a behaviour that the object can perform
+    */
+    
     // Update is called once per frame
     void Update()
     {
@@ -29,7 +42,14 @@ public class Weapon : MonoBehaviour
 
         // Using .(dot) allows us to access data and behaviors of any object defined in our scripts
          
-        float rotationAmount = rotationSpeed * Time.deltaTime;
+        // While calling CalculateRotationAmount here use Time.deltaTime
+        float rotationAmount = CalculateRotationAmount(Time.deltaTime);
         transform.RotateAround(rotationPoint, Vector3.forward, rotationAmount);
+    }
+
+    // While creating a method pass delta, we can't repeat the same value
+    private float CalculateRotationAmount(float delta)
+    {
+        return rotationSpeed * delta;
     }
 }
